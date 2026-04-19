@@ -1,0 +1,24 @@
+name: 📬 دریافت کد تأیید با ایمیل موقت
+
+on:
+  workflow_dispatch:      # اجرای دستی از تب Actions
+  # schedule:             # در صورت نیاز می‌توانید زمان‌بندی هم اضافه کنید
+  #   - cron: '0 */6 * * *'  # هر ۶ ساعت یک بار
+
+jobs:
+  fetch-otp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 دریافت کد از مخزن
+        uses: actions/checkout@v4
+
+      - name: 🐍 نصب پایتون
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 📦 نصب وابستگی‌ها
+        run: pip install requests
+
+      - name: 🚀 اجرای اسکریپت ایمیل موقت
+        run: python temp_mail_otp.py
